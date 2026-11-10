@@ -33,7 +33,11 @@ jobs:
 
       - name: Generate Android files
         run: flutter create --platforms=android .
-
+      - name: Fix default Flutter test
+        run: |
+          if [ -f test/widget_test.dart ]; then
+            sed -i 's/MyApp/OmniscientApp/g' test/widget_test.dart
+          fi
       - name: Get dependencies
         run: flutter pub get
 
